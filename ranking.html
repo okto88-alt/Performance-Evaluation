@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff Ranking Dashboard - Template</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Additional styles specific to ranking dashboard */
+        .rank-number {
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+        
+        .rank-1 {
+            color: #ffd700;
+            background: linear-gradient(135deg, #ffd700, #ffed4a);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .rank-2 {
+            color: #c0c0c0;
+            background: linear-gradient(135deg, #c0c0c0, #e8e8e8);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .rank-3 {
+            color: #cd7f32;
+            background: linear-gradient(135deg, #cd7f32, #daa760);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        .grade-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        
+        .grade-A-plus {
+            background: linear-gradient(135deg, #28a745, #20c997);
+            color: white;
+        }
+        
+        .grade-A {
+            background: linear-gradient(135deg, #17a2b8, #007bff);
+            color: white;
+        }
+        
+        .grade-B {
+            background: linear-gradient(135deg, #ffc107, #fd7e14);
+            color: white;
+        }
+        
+        .grade-C {
+            background: linear-gradient(135deg, #fd7e14, #dc3545);
+            color: white;
+        }
+        
+        .grade-D {
+            background: linear-gradient(135deg, #dc3545, #6f42c1);
+            color: white;
+        }
+        
+        .status-active {
+            color: #28a745;
+            font-weight: 600;
+        }
+        
+        .status-review {
+            color: #ffc107;
+            font-weight: 600;
+        }
+        
+        .filter-controls {
+            background: white;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+        
+        .filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .filter-group label {
+            font-weight: 600;
+            color: #495057;
+            font-size: 0.9rem;
+        }
+        
+        .filter-group select,
+        .filter-group input {
+            padding: 0.75rem;
+            border: 2px solid #e9ecef;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .filter-group select:focus,
+        .filter-group input:focus {
+            outline: none;
+            border-color: #ff6b35;
+        }
+        
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .toggle-group input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: #ff6b35;
+        }
+        
+        .ranking-table {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+        
+        .table-wrapper {
+            overflow-x: auto;
+        }
+        
+        .ranking-table table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+        
+        .ranking-table thead {
+            background: linear-gradient(135deg, #ff6b35 0%, #f7931e 100%);
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        
+        .ranking-table th {
+            padding: 1rem 0.75rem;
+            text-align: center;
+            font-weight: 600;
+            border-right: 1px solid rgba(255,255,255,0.2);
+            white-space: nowrap;
+        }
+        
+        .ranking-table th:last-child {
+            border-right: none;
+        }
+        
+        .ranking-table th:first-child {
+            text-align: center;
+        }
+        
+        .ranking-table td {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e9ecef;
+            text-align: center;
+            vertical-align: middle;
+        }
+        
+        .ranking-table tbody tr {
+            transition: background-color 0.3s ease;
+        }
+        
+        .ranking-table tbody tr:hover {
+            background-color: #f8f9fa;
+        }
+        
+        .ranking-table tbody tr.top-1 {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border-left: 4px solid #ffd700;
+        }
+        
+        .ranking-table tbody tr.top-2 {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-left: 4px solid #c0c0c0;
+        }
+        
+        .ranking-table tbody tr.top-3 {
+            background: linear-gradient(135deg, #fdf2e9 0%, #fdebd0 100%);
+            border-left: 4px solid #cd7f32;
+        }
+        
+        .col-rank {
+            width: 80px;
+        }
+        
+        .col-staff-id {
+            width: 100px;
+            font-weight: 600;
+        }
+        
+        .col-name {
+            width: 150px;
+            text-align: left !important;
+            font-weight: 500;
+        }
+        
+        .col-department {
+            width: 150px;
+        }
+        
+        .col-score {
+            width: 100px;
+        }
+        
+        .col-average {
+            width: 100px;
+        }
+        
+        .col-grade {
+            width: 80px;
+        }
+        
+        .col-status {
+            width: 100px;
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 3rem;
+            color: #6c757d;
+            font-style: italic;
+        }
+        
+        .data-source {
+            background: #e3f2fd;
+            border: 1px solid #2196f3;
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .data-source-icon {
+            color: #2196f3;
+            font-size: 1.2rem;
+        }
+        
+        .ranking-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+        
+        .summary-card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 1.5rem;
+            border-radius: 12px;
+            border: 1px solid #e9ecef;
+            transition: transform 0.3s ease;
+        }
+        
+        .summary-card:hover {
+            transform: translateY(-2px);
+        }
+        
+        .summary-card.best-performer {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            border: 1px solid #ffd700;
+        }
+        
+        .summary-card.lowest-performer {
+            background: linear-gradient(135deg, #f8d7da 0%, #f1b0b7 100%);
+            border: 1px solid #dc3545;
+        }
+        
+        .summary-card h3 {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .summary-card .value {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: #ff6b35;
+            margin-bottom: 0.25rem;
+        }
+        
+        .summary-card .subtitle {
+            font-size: 0.8rem;
+            color: #868e96;
+        }
+        
+        @media (max-width: 768px) {
+            .filter-controls {
+                grid-template-columns: 1fr;
+            }
+            
+            .ranking-table {
+                font-size: 0.8rem;
+            }
+            
+            .ranking-table th,
+            .ranking-table td {
+                padding: 0.5rem 0.25rem;
+            }
+            
+            .col-name {
+                min-width: 120px;
+            }
+            
+            .col-department {
+                min-width: 120px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-content">
+            <h1>Staff Ranking Dashboard</h1>
+            <p class="template-disclaimer">
+                <strong>⚠️ TEMPLATE ONLY:</strong> This dashboard uses sample data for demonstration purposes only.
+                Safe for GitHub publication.
+            </p>
+        </div>
+    </header>
+
+    <!-- Controls -->
+    <div class="controls">
+        <div class="controls-left">
+            <div class="data-source" id="data-source">
+                <span class="data-source-icon">📊</span>
+                <span id="data-source-text">Loading data source...</span>
+            </div>
+        </div>
+        <div class="controls-right">
+            <button id="export-ranking" class="btn btn-primary">Export to Excel</button>
+            <button id="refresh-data" class="btn btn-outline">Refresh Data</button>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Summary Cards -->
+        <div class="ranking-summary" id="ranking-summary">
+            <!-- Summary cards will be populated by JavaScript -->
+        </div>
+
+        <!-- Filter Controls -->
+        <div class="filter-controls">
+            <div class="filter-group">
+                <label for="department-filter">Department</label>
+                <select id="department-filter">
+                    <option value="">All Departments</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="grade-filter">Grade</label>
+                <select id="grade-filter">
+                    <option value="">All Grades</option>
+                    <option value="A+">A+</option>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label for="search-input">Search Staff</label>
+                <input type="text" id="search-input" placeholder="Staff ID or Name">
+            </div>
+            
+            <div class="filter-group">
+                <label>&nbsp;</label>
+                <div class="toggle-group">
+                    <input type="checkbox" id="top-performers-only">
+                    <label for="top-performers-only">Top Performers Only</label>
+                </div>
+            </div>
+        </div>
+
+        <!-- Ranking Table -->
+        <div class="ranking-table">
+            <div class="table-wrapper">
+                <table id="ranking-table">
+                    <thead>
+                        <tr>
+                            <th class="col-rank">Rank</th>
+                            <th class="col-staff-id">Staff ID</th>
+                            <th class="col-name">Name</th>
+                            <th class="col-department">Department</th>
+                            <th class="col-score">Total Score</th>
+                            <th class="col-average">Average</th>
+                            <th class="col-grade">Grade</th>
+                            <th class="col-status">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ranking-tbody">
+                        <!-- Content will be populated by JavaScript -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- No Data Message -->
+        <div class="no-data" id="no-data" style="display: none;">
+            <h3>No evaluation data found</h3>
+            <p>Please complete evaluations in the Performance Evaluation Dashboard first.</p>
+            <p>Data is loaded from localStorage or demo data if available.</p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <p>&copy; 2025 Staff Ranking System - Template Version</p>
+            <p>This dashboard uses sample data for demonstration purposes only.</p>
+        </div>
+    </footer>
+
+    <!-- Loading Overlay -->
+    <div id="loading-overlay" class="loading-overlay">
+        <div class="loading-spinner"></div>
+        <p>Loading staff data...</p>
+    </div>
+
+    <script src="ranking.js"></script>
+</body>
+</html>
