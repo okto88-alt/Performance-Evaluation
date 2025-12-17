@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEON TECH THEME - The Coolest Dashboard Theme Ever!</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="neon-tech-theme.css">
+    <style>
+        .neon-demo-container {
+            padding: 2rem;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+        
+        .neon-demo-header {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .neon-demo-header h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #00ffff, #ff00ff, #00ff00, #ff6600, #aa00ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 300% 300%;
+            animation: neon-rainbow 3s ease-in-out infinite;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        @keyframes neon-rainbow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .neon-demo-header p {
+            font-size: 1.3rem;
+            color: #ffffff;
+            max-width: 800px;
+            margin: 0 auto;
+            font-weight: 600;
+            text-shadow: 0 0 10px #ffffff;
+        }
+        
+        .neon-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .neon-feature-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid #00ffff;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .neon-feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0, 255, 255, 0.2), transparent);
+            transition: left 0.6s;
+        }
+        
+        .neon-feature-card:hover::before {
+            left: 100%;
+        }
+        
+        .neon-feature-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 0 40px #00ffff, 0 0 80px #00ffff;
+            border-color: #ff00ff;
+        }
+        
+        .neon-feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+        
+        .neon-feature-card h3 {
+            color: #00ffff;
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            text-shadow: 0 0 10px #00ffff;
+        }
+        
+        .neon-feature-card p {
+            color: #ffffff;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+        
+        .neon-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+        
+        .neon-theme-preview {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+        }
+        
+        .neon-theme-preview h3 {
+            text-align: center;
+            padding: 1.5rem;
+            margin: 0;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .default-preview h3 {
+            background: #ff6b35;
+            color: white;
+        }
+        
+        .neon-preview h3 {
+            background: linear-gradient(135deg, #00ffff, #ff00ff, #00ff00);
+            color: white;
+            animation: neon-title-pulse 2s ease-in-out infinite alternate;
+        }
+        
+        @keyframes neon-title-pulse {
+            from { filter: brightness(1); }
+            to { filter: brightness(1.3); }
+        }
+        
+        .neon-dashboard-preview {
+            padding: 2rem;
+            min-height: 500px;
+        }
+        
+        .neon-preview .neon-dashboard-preview {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 25%, #0d1117 50%, #1a1a1a 75%, #0a0a0a 100%);
+        }
+        
+        .neon-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+        
+        .neon-preview-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1.5rem;
+            border-radius: 8px;
+            text-align: center;
+            border: 2px solid rgba(0, 255, 255, 0.3);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .neon-preview-card:hover {
+            border-color: #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+            transform: translateY(-5px);
+        }
+        
+        .neon-preview-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .neon-preview-value {
+            font-size: 2rem;
+            font-weight: 900;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .neon-preview-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .neon-preview-table th,
+        .neon-preview-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .neon-preview-table th {
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            border-bottom: 2px solid;
+            border-image: linear-gradient(135deg, #00ffff, #ff00ff, #00ff00) 1;
+        }
+        
+        .neon-preview-table tbody tr {
+            transition: all 0.3s ease;
+        }
+        
+        .neon-preview-table tbody tr:hover {
+            background: rgba(0, 255, 255, 0.1);
+            box-shadow: 0 0 15px rgba(0, 255, 255, 0.3);
+        }
+        
+        .neon-instructions {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 3rem;
+            margin-top: 3rem;
+            border: 2px solid;
+            border-image: linear-gradient(135deg, #00ffff, #ff00ff, #00ff00) 1;
+            backdrop-filter: blur(15px);
+        }
+        
+        .neon-instructions h3 {
+            color: #00ffff;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            font-weight: 900;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            text-shadow: 0 0 20px #00ffff;
+            text-align: center;
+        }
+        
+        .neon-instructions p {
+            color: #ffffff;
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            text-align: center;
+        }
+        
+        .neon-code-block {
+            background: rgba(0, 0, 0, 0.8);
+            border: 2px solid #00ffff;
+            border-radius: 8px;
+            padding: 2rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 1rem;
+            color: #00ffff;
+            overflow-x: auto;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.3);
+            line-height: 1.8;
+        }
+        
+        .neon-action-buttons {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+        
+        .neon-action-buttons .btn {
+            padding: 1.5rem 3rem;
+            font-size: 1.2rem;
+            border-radius: 12px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.8rem;
+            font-weight: 900;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            transition: all 0.3s ease;
+            border: 3px solid;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .neon-action-buttons .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.6s;
+        }
+        
+        .neon-action-buttons .btn:hover::before {
+            left: 100%;
+        }
+        
+        .neon-demo-nav {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+        
+        .neon-demo-nav button {
+            padding: 1rem 2rem;
+            border: 3px solid;
+            border-radius: 8px;
+            font-weight: 900;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .neon-demo-nav .default-btn {
+            background: #ff6b35;
+            color: white;
+            border-color: #ff6b35;
+        }
+        
+        .neon-demo-nav .neon-btn {
+            background: linear-gradient(135deg, #00ffff, #ff00ff);
+            color: white;
+            border-color: #00ffff;
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.5);
+        }
+        
+        .neon-demo-nav button:hover {
+            transform: translateY(-3px) scale(1.05);
+        }
+        
+        .neon-demo-nav button.active {
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.8);
+            animation: neon-active-pulse 1s ease-in-out infinite alternate;
+        }
+        
+        @keyframes neon-active-pulse {
+            from { box-shadow: 0 0 30px rgba(0, 255, 255, 0.8); }
+            to { box-shadow: 0 0 50px rgba(0, 255, 255, 1), 0 0 80px rgba(0, 255, 255, 0.8); }
+        }
+        
+        .neon-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
+        }
+        
+        .neon-stat-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px solid;
+            border-image: linear-gradient(135deg, #00ffff, #ff00ff, #00ff00) 1;
+            border-radius: 12px;
+            padding: 2rem;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+        
+        .neon-stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 30px rgba(0, 255, 255, 0.5);
+        }
+        
+        .neon-stat-number {
+            font-size: 3rem;
+            font-weight: 900;
+            font-family: 'Courier New', monospace;
+            margin-bottom: 0.5rem;
+        }
+        
+        .neon-stat-label {
+            font-size: 1rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        @media (max-width: 1024px) {
+            .neon-comparison {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .neon-demo-container {
+                padding: 1rem;
+            }
+            
+            .neon-demo-header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .neon-action-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .neon-action-buttons .btn {
+                width: 100%;
+                max-width: 350px;
+                justify-content: center;
+            }
+            
+            .neon-features {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="neon-tech-theme">
+    <div class="neon-demo-container">
+        <div class="neon-demo-header">
+            <h1>🌟 NEON TECH THEME</h1>
+            <p>The COOLEST dashboard theme ever created! Experience holographic effects, neon glow animations, and futuristic styling that will blow your mind!</p>
+        </div>
+
+        <div class="neon-stats">
+            <div class="neon-stat-card">
+                <div class="neon-stat-number" style="color: #00ffff;">6</div>
+                <div class="neon-stat-label" style="color: #00ffff;">Neon Colors</div>
+            </div>
+            <div class="neon-stat-card">
+                <div class="neon-stat-number" style="color: #ff00ff;">15+</div>
+                <div class="neon-stat-label" style="color: #ff00ff;">Animations</div>
+            </div>
+            <div class="neon-stat-card">
+                <div class="neon-stat-number" style="color: #00ff00;">100%</div>
+                <div class="neon-stat-label" style="color: #00ff00;">Futuristic</div>
+            </div>
+            <div class="neon-stat-card">
+                <div class="neon-stat-number" style="color: #ff6600;">∞</div>
+                <div class="neon-stat-label" style="color: #ff6600;">Cool Factor</div>
+            </div>
+        </div>
+
+        <div class="neon-features">
+            <div class="neon-feature-card">
+                <span class="neon-feature-icon">⚡</span>
+                <h3>Neon Glow Effects</h3>
+                <p>Intense neon glow on all interactive elements with pulsing animations and color transitions</p>
+            </div>
+            <div class="neon-feature-card">
+                <span class="neon-feature-icon">🌈</span>
+                <h3>Holographic Design</h3>
+                <p>Rainbow gradients, glassmorphism effects, and futuristic color schemes throughout</p>
+            </div>
+            <div class="neon-feature-card">
+                <span class="neon-feature-icon">🎮</span>
+                <h3>Animated Backgrounds</h3>
+                <p>Moving grid patterns, sweeping light effects, and dynamic background animations</p>
+            </div>
+            <div class="neon-feature-card">
+                <span class="neon-feature-icon">🚀</span>
+                <h3>Futuristic Typography</h3>
+                <p>Monospace fonts, uppercase styling, and tech-focused design language</p>
+            </div>
+            <div class="neon-feature-card">
+                <span class="neon-feature-icon">💎</span>
+                <h3>Glass Morphism</h3>
+                <p>Semi-transparent cards with backdrop blur and neon border effects</p>
+            </div>
+            <div class="neon-feature-card">
+                <span class="neon-feature-icon">🎯</span>
+                <h3>Interactive Hover</h3>
+                <p>Dynamic hover effects with scaling, glow, and smooth transitions on all elements</p>
+            </div>
+        </div>
+
+        <div class="neon-demo-nav">
+            <button class="default-btn" onclick="showDefault()">Default Theme</button>
+            <button class="neon-btn active" onclick="showNeon()">NEON TECH Theme</button>
+        </div>
+
+        <div class="neon-comparison">
+            <!-- Default Theme Preview -->
+            <div class="neon-theme-preview default-preview" id="default-preview" style="display: none;">
+                <h3>Default Theme</h3>
+                <div class="neon-dashboard-preview" style="background: #f8f9fa; color: #333;">
+                    <div class="neon-summary">
+                        <div class="neon-preview-card" style="background: #fff; color: #333; border: 1px solid #e9ecef;">
+                            <div class="neon-preview-label" style="color: #333;">Overall Score</div>
+                            <div class="neon-preview-value" style="color: #ff6b35;">4.2</div>
+                        </div>
+                        <div class="neon-preview-card" style="background: #fff; color: #333; border: 1px solid #e9ecef;">
+                            <div class="neon-preview-label" style="color: #333;">Total Criteria</div>
+                            <div class="neon-preview-value" style="color: #ff6b35;">30</div>
+                        </div>
+                        <div class="neon-preview-card" style="background: #fff; color: #333; border: 1px solid #e9ecef;">
+                            <div class="neon-preview-label" style="color: #333;">Completion</div>
+                            <div class="neon-preview-value" style="color: #ff6b35;">95%</div>
+                        </div>
+                        <div class="neon-preview-card" style="background: #fff; color: #333; border: 1px solid #e9ecef;">
+                            <div class="neon-preview-label" style="color: #333;">Level</div>
+                            <div class="neon-preview-value" style="color: #ff6b35;">A</div>
+                        </div>
+                    </div>
+
+                    <table class="neon-preview-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Criteria</th>
+                                <th>Score</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Work Quality</td>
+                                <td><strong style="color: #ff6b35;">4.5</strong></td>
+                                <td><span style="color: #28a745;">✓ Complete</span></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Communication</td>
+                                <td><strong style="color: #ff6b35;">4.0</strong></td>
+                                <td><span style="color: #28a745;">✓ Complete</span></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Teamwork</td>
+                                <td><strong style="color: #ff6b35;">4.2</strong></td>
+                                <td><span style="color: #ffc107;">⏳ Pending</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Neon Tech Theme Preview -->
+            <div class="neon-theme-preview neon-preview" id="neon-preview">
+                <h3>🌟 NEON TECH THEME</h3>
+                <div class="neon-dashboard-preview">
+                    <div class="neon-summary">
+                        <div class="neon-preview-card">
+                            <div class="neon-preview-label">Overall Score</div>
+                            <div class="neon-preview-value" style="color: #00ffff;">4.2</div>
+                        </div>
+                        <div class="neon-preview-card">
+                            <div class="neon-preview-label">Total Criteria</div>
+                            <div class="neon-preview-value" style="color: #ff00ff;">30</div>
+                        </div>
+                        <div class="neon-preview-card">
+                            <div class="neon-preview-label">Completion</div>
+                            <div class="neon-preview-value" style="color: #00ff00;">95%</div>
+                        </div>
+                        <div class="neon-preview-card">
+                            <div class="neon-preview-label">Level</div>
+                            <div class="neon-preview-value" style="color: #ff6600;">A</div>
+                        </div>
+                    </div>
+
+                    <table class="neon-preview-table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Criteria</th>
+                                <th>Score</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td>Work Quality</td>
+                                <td><strong style="color: #00ffff;">4.5</strong></td>
+                                <td><span style="color: #00ff00;">✓ Complete</span></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td>Communication</td>
+                                <td><strong style="color: #ff00ff;">4.0</strong></td>
+                                <td><span style="color: #00ff00;">✓ Complete</span></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td>Teamwork</td>
+                                <td><strong style="color: #00ffff;">4.2</strong></td>
+                                <td><span style="color: #ff6600;">⏳ Pending</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="neon-instructions">
+            <h3>🚀 How to Activate NEON TECH Theme</h3>
+            <p>Transform your dashboard into the coolest interface ever in just 2 steps:</p>
+            
+            <h4 style="color: #ff00ff; font-size: 1.3rem; margin: 2rem 0 1rem 0;">Step 1: Uncomment the Neon CSS</h4>
+            <div class="neon-code-block">
+&lt;!-- In your HTML &lt;head&gt; section, change: --&gt;<br>
+&lt;!-- &lt;link rel="stylesheet" href="neon-tech-theme.css"&gt; --&gt;<br>
+&lt;link rel="stylesheet" href="neon-tech-theme.css"&gt;
+            </div>
+
+            <h4 style="color: #00ffff; font-size: 1.3rem; margin: 2rem 0 1rem 0;">Step 2: Add Neon Theme Class</h4>
+            <div class="neon-code-block">
+&lt;!-- Change your &lt;body&gt; tag from: --&gt;<br>
+&lt;body&gt;<br>
+<br>
+&lt;!-- To: --&gt;<br>
+&lt;body class="neon-tech-theme"&gt;
+            </div>
+
+            <h4 style="color: #00ff00; font-size: 1.3rem; margin: 2rem 0 1rem 0;">Step 3: Experience the Coolness!</h4>
+            <p>Save your files and refresh the browser. Prepare to be amazed by the most futuristic dashboard theme ever created!</p>
+        </div>
+
+        <div class="neon-action-buttons">
+            <a href="index.html" class="btn btn-primary">
+                📊 Open Evaluation Dashboard
+            </a>
+            <a href="ranking.html" class="btn btn-secondary">
+                🏆 Open Ranking Dashboard
+            </a>
+            <a href="theme-demo.html" class="btn btn-outline">
+                🎨 View All Themes
+            </a>
+        </div>
+    </div>
+
+    <script>
+        function showDefault() {
+            document.getElementById('default-preview').style.display = 'block';
+            document.getElementById('neon-preview').style.display = 'none';
+            
+            // Update button states
+            document.querySelector('.default-btn').classList.add('active');
+            document.querySelector('.neon-btn').classList.remove('active');
+            
+            // Remove neon theme from demo page
+            document.body.className = '';
+        }
+
+        function showNeon() {
+            document.getElementById('default-preview').style.display = 'none';
+            document.getElementById('neon-preview').style.display = 'block';
+            
+            // Update button states
+            document.querySelector('.neon-btn').classList.add('active');
+            document.querySelector('.default-btn').classList.remove('active');
+            
+            // Add neon theme to demo page
+            document.body.className = 'neon-tech-theme';
+        }
+
+        // Add some extra neon effects
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add click effects to feature cards
+            const featureCards = document.querySelectorAll('.neon-feature-card');
+            featureCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    this.style.animation = 'neon-click-flash 0.3s ease';
+                    setTimeout(() => {
+                        this.style.animation = '';
+                    }, 300);
+                });
+            });
+            
+            // Add rainbow effect to stats
+            const statNumbers = document.querySelectorAll('.neon-stat-number');
+            statNumbers.forEach(stat => {
+                stat.addEventListener('mouseenter', function() {
+                    this.style.animation = 'neon-rainbow 1s ease-in-out infinite';
+                });
+                stat.addEventListener('mouseleave', function() {
+                    this.style.animation = '';
+                });
+            });
+        });
+
+        // Add neon click flash animation
+        const neonStyles = document.createElement('style');
+        neonStyles.textContent = `
+            @keyframes neon-click-flash {
+                0% { filter: brightness(1); }
+                50% { filter: brightness(2) saturate(2); }
+                100% { filter: brightness(1); }
+            }
+        `;
+        document.head.appendChild(neonStyles);
+    </script>
+</body>
+</html>
